@@ -47,6 +47,7 @@ services:
     - ./mongo/init.js:/docker-entrypoint-initdb.d/init.js:ro
     - ./mongo/data:/data/db
     environment:
+      # TODO: get these from env
       MONGO_INITDB_ROOT_USERNAME: laravel
       MONGO_INITDB_DATABASE: laravel
       MONGO_INITDB_ROOT_PASSWORD: testpass
