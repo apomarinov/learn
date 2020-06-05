@@ -14,11 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $b = new App\Book;
-    $b->asd = 123;
-    $b->save();
-    header('Content-type: application/json');
-    echo json_encode(App\Book::all()->toArray(), JSON_PRETTY_PRINT);
-    exit;
+
     return view('welcome');
 });
