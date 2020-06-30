@@ -1,9 +1,11 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import Grid from "@material-ui/core/Grid";
 import Card from "./Card";
 import {withRouter} from 'react-router-dom'
+import {getAllCollections} from '../actions/collections'
 
 const styles = theme => ({
 
@@ -13,8 +15,7 @@ class Home extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-        };
+        this.props.getAllCollections();
     }
 
     componentDidMount() {
@@ -24,18 +25,22 @@ class Home extends React.Component {
     render() {
         const {
             classes,
-            history
+            history,
+            collections
         } = this.props;
         return (
             <div className={classes.root}>
                 <Grid container spacing={3} justify={'center'}>
-                    <Grid item>
-                        <Card
-                            title={'Manee Books'}
-                            image={'images/maanii.png'}
-                            onClick={() => history.push('collection/maanee')}
-                        />
-                    </Grid>
+                    {collections.map(col => {
+                        return (
+                        <Grid item key={col.id}>
+                            <Card
+                                title={col.title}
+                                image={col.img}
+                                onClick={() => history.push('collection/'+col.title)}
+                            />
+                        </Grid>);
+                    })}
                 </Grid>
             </div>
         );
@@ -44,6 +49,16 @@ class Home extends React.Component {
 
 Home.propTypes = {
     classes: PropTypes.object.isRequired,
+    getAllCollections: PropTypes.func,
+    collections: PropTypes.array,
 };
 
-export default withStyles(styles)(withRouter(Home));
+const mapState = state => ({
+    collections: state.collections
+});
+
+const mapDispatch = {
+    getAllCollections,
+};
+
+export default connect(mapState, mapDispatch)(withStyles(styles)(withRouter(Home)));

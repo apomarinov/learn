@@ -12,6 +12,8 @@ import { createBrowserHistory as history} from 'history';
 import Collection from "./Collection";
 import Book from "./Book";
 import Lesson from "./Lesson";
+import {Provider} from 'react-redux'
+import store from "../store"
 
 const theme = createMuiTheme({
     palette: {
@@ -23,19 +25,21 @@ const theme = createMuiTheme({
 
 function App() {
     return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Container disableGutters={true}>
-                <Router history={history}>
-                    <Switch>
-                        <Route path="/" exact component={Home} />
-                        <Route path="/collection/:name/book/:book/lesson/:lesson" component={Lesson} />
-                        <Route path="/collection/:name/book/:book" component={Book} />
-                        <Route path="/collection/:name" component={Collection} />
-                    </Switch>
-                </Router>
-            </Container>
-        </ThemeProvider>
+        <Provider store={store}>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <Container disableGutters={true}>
+                    <Router history={history}>
+                        <Switch>
+                            <Route path="/" exact component={Home} />
+                            <Route path="/collection/:name/book/:book/lesson/:lesson" component={Lesson} />
+                            <Route path="/collection/:name/book/:book" component={Book} />
+                            <Route path="/collection/:name" component={Collection} />
+                        </Switch>
+                    </Router>
+                </Container>
+            </ThemeProvider>
+        </Provider>
     );
 }
 
