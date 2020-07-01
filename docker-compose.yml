@@ -53,13 +53,11 @@ services:
     networks:
       - app-network
 
-#  #Mongo Service
-#  ubu:
-#    image: ubuntu
-#    container_name: ubu
-#    tty: true
-#    networks:
-#      - app-network
+  redis:
+    image: "redis:alpine"
+    container_name: redis
+    networks:
+      - app-network
 
 #Docker Networks
 networks:
