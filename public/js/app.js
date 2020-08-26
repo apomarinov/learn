@@ -1916,7 +1916,7 @@ Word.propTypes = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  "host": "http://localhost:3000/"
+  "host": "http://localhost:81/"
 });
 
 /***/ }),
@@ -2086,9 +2086,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var sagaMiddleware = Object(redux_saga__WEBPACK_IMPORTED_MODULE_1__["default"])();
-var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers__WEBPACK_IMPORTED_MODULE_2__["default"], Object(redux__WEBPACK_IMPORTED_MODULE_0__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(_logger__WEBPACK_IMPORTED_MODULE_4__["default"], sagaMiddleware), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
+var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers__WEBPACK_IMPORTED_MODULE_2__["default"], Object(redux__WEBPACK_IMPORTED_MODULE_0__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(_logger__WEBPACK_IMPORTED_MODULE_4__["default"], sagaMiddleware), window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : function (f) {
+  return f;
+}));
 sagaMiddleware.run(_sagas_collections__WEBPACK_IMPORTED_MODULE_3__["watchFetchCollections"], {
-  url: 'http://localhost/api/'
+  url: 'http://localhost:81/api/'
 });
 /* harmony default export */ __webpack_exports__["default"] = (store);
 
@@ -2112,8 +2114,8 @@ sagaMiddleware.run(_sagas_collections__WEBPACK_IMPORTED_MODULE_3__["watchFetchCo
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/apostol/app/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/apostol/app/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/apo/code/learn/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/apo/code/learn/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

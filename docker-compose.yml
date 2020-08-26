@@ -30,7 +30,7 @@ services:
       - ./:/var/www
       - ./nginx/conf.d/:/etc/nginx/conf.d/
     ports:
-      - "80:80"
+      - "81:80"
     networks:
       - app-network
 

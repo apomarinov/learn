@@ -12,9 +12,9 @@ const store = createStore(
             createLogger,
             sagaMiddleware
             ),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+        window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
     )
 );
-sagaMiddleware.run(watchFetchCollections, {url: 'http://localhost/api/'});
+sagaMiddleware.run(watchFetchCollections, {url: 'http://localhost:81/api/'});
 
 export default store;
