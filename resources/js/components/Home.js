@@ -6,6 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import Card from "./Card";
 import {withRouter} from 'react-router-dom'
 import {getAllCollections} from '../actions/collections'
+import GridViewer from "./GridViewer";
 
 const styles = theme => ({
 
@@ -25,23 +26,18 @@ class Home extends React.Component {
     render() {
         const {
             classes,
-            history,
+            match,
             collections
         } = this.props;
         return (
             <div className={classes.root}>
-                <Grid container spacing={3} justify={'center'}>
-                    {collections.map(col => {
-                        return (
-                        <Grid item key={col.id}>
-                            <Card
-                                title={col.title}
-                                image={col.img}
-                                onClick={() => history.push('collection/'+col.title)}
-                            />
-                        </Grid>);
-                    })}
-                </Grid>
+                {collections && (
+                    <GridViewer
+                        items={collections}
+                        baseUrl={match.url}
+                        urlResource={'collection'}
+                    />
+                )}
             </div>
         );
     }

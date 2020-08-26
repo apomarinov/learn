@@ -7,7 +7,7 @@ import blue from "@material-ui/core/colors/blue";
 import pink from "@material-ui/core/colors/pink";
 import {ThemeProvider} from "@material-ui/styles";
 import Container from "@material-ui/core/Container";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Router, Switch, Route } from "react-router-dom";
 import { createBrowserHistory as history} from 'history';
 import Collection from "./Collection";
 import Book from "./Book";
@@ -29,12 +29,12 @@ function App() {
             <ThemeProvider theme={theme}>
                 <CssBaseline />
                 <Container disableGutters={true}>
-                    <Router history={history}>
+                    <Router history={history()}>
                         <Switch>
                             <Route path="/" exact component={Home} />
-                            <Route path="/collection/:name/book/:book/lesson/:lesson" component={Lesson} />
-                            <Route path="/collection/:name/book/:book" component={Book} />
-                            <Route path="/collection/:name" component={Collection} />
+                            <Route path="/collection/:collection/book/:book/lesson/:lesson" component={Lesson} />
+                            <Route path="/collection/:collection/book/:book" component={Book} />
+                            <Route path="/collection/:collection" component={Collection} />
                         </Switch>
                     </Router>
                 </Container>

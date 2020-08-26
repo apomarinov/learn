@@ -165,7 +165,7 @@ export default function Drawer(props) {
                         <TableBody>
                             {rows.map((row) => (
                                 <TableRow key={row.word}>
-                                    <TableCell component="th" scope="row">
+                                    <TableCell scope="row">
                                         {row.word}
                                     </TableCell>
                                     <TableCell align="right">{row.transcription} - {row.transliteration}</TableCell>
