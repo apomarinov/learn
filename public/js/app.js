@@ -4,15 +4,23 @@
 /*!*********************************************!*\
   !*** ./resources/js/actions/collections.js ***!
   \*********************************************/
-/*! exports provided: getAllCollections */
+/*! exports provided: getAllCollections, getCollection */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllCollections", function() { return getAllCollections; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCollection", function() { return getCollection; });
 function getAllCollections() {
   return {
     type: 'GET_ALL_COLLECTIONS_START'
+  };
+}
+;
+function getCollection(slug) {
+  return {
+    type: 'GET_COLLECTION_START',
+    slug: slug
   };
 }
 ;
@@ -551,18 +559,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _GridViewer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./GridViewer */ "./resources/js/components/GridViewer.js");
+/* harmony import */ var _actions_collections__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/collections */ "./resources/js/actions/collections.js");
+
 
 
 
 
 function Collection() {
   var match = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useRouteMatch"])();
-  var params = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])();
+
+  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
+      slug = _useParams.collection;
+
   var collection = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useSelector"])(function (state) {
-    return state.collections.find(function (c) {
-      return c.slug == params.collection;
+    var _state$collections$cu;
+
+    return (_state$collections$cu = state.collections.current) !== null && _state$collections$cu !== void 0 ? _state$collections$cu : state.collections.all.find(function (c) {
+      return c.slug == slug;
     });
   });
+
+  if (!collection) {
+    var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useDispatch"])();
+    dispatch(Object(_actions_collections__WEBPACK_IMPORTED_MODULE_4__["getCollection"])(slug));
+  }
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, collection && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_GridViewer__WEBPACK_IMPORTED_MODULE_3__["default"], {
     items: collection.books,
     baseUrl: match.url,
@@ -985,7 +1006,7 @@ Home.propTypes = {
 
 var mapState = function mapState(state) {
   return {
-    collections: state.collections
+    collections: state.collections.all
   };
 };
 
@@ -1888,14 +1909,28 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var collections = function collections() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
     case 'GET_ALL_COLLECTIONS_DONE':
-      var _collections = action.collections;
-      return _collections;
+      var all = action.collections;
+      return _objectSpread(_objectSpread({}, state), {}, {
+        all: all
+      });
+
+    case 'GET_COLLECTION_DONE':
+      var current = action.collection;
+      return _objectSpread(_objectSpread({}, state), {}, {
+        current: current
+      });
 
     default:
       return state;
@@ -1930,13 +1965,15 @@ var reducers = Object(redux__WEBPACK_IMPORTED_MODULE_1__["combineReducers"])({
 /*!*******************************************!*\
   !*** ./resources/js/sagas/collections.js ***!
   \*******************************************/
-/*! exports provided: fetchCollections, watchFetchCollections */
+/*! exports provided: fetchCollections, watchFetchCollections, fetchCollection, watchFetchCollection */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCollections", function() { return fetchCollections; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "watchFetchCollections", function() { return watchFetchCollections; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCollection", function() { return fetchCollection; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "watchFetchCollection", function() { return watchFetchCollection; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _redux_saga_core_effects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @redux-saga/core/effects */ "./node_modules/@redux-saga/core/dist/redux-saga-effects.esm.js");
@@ -1946,7 +1983,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _marked = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(fetchCollections),
-    _marked2 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFetchCollections);
+    _marked2 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFetchCollections),
+    _marked3 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(fetchCollection),
+    _marked4 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFetchCollection);
 
 
 
@@ -2004,6 +2043,60 @@ function watchFetchCollections(api) {
     }
   }, _marked2);
 }
+function fetchCollection(api, _ref) {
+  var slug, data;
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function fetchCollection$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          slug = _ref.slug;
+          _context3.prev = 1;
+          _context3.next = 4;
+          return Object(_redux_saga_core_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(axios__WEBPACK_IMPORTED_MODULE_3___default.a.get, api.url + 'collections/' + slug);
+
+        case 4:
+          data = _context3.sent;
+          _context3.next = 7;
+          return Object(_redux_saga_core_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+            type: "GET_COLLECTION_DONE",
+            collection: data.data
+          });
+
+        case 7:
+          _context3.next = 13;
+          break;
+
+        case 9:
+          _context3.prev = 9;
+          _context3.t0 = _context3["catch"](1);
+          _context3.next = 13;
+          return Object(_redux_saga_core_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+            type: "GET_COLLECTION_FAIL",
+            message: _context3.t0
+          });
+
+        case 13:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  }, _marked3, null, [[1, 9]]);
+}
+function watchFetchCollection(api) {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFetchCollection$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])('GET_COLLECTION_START', fetchCollection, api);
+
+        case 2:
+        case "end":
+          return _context4.stop();
+      }
+    }
+  }, _marked4);
+}
 
 /***/ }),
 
@@ -2027,12 +2120,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var sagaMiddleware = Object(redux_saga__WEBPACK_IMPORTED_MODULE_1__["default"])();
-var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers__WEBPACK_IMPORTED_MODULE_2__["default"], Object(redux__WEBPACK_IMPORTED_MODULE_0__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(_logger__WEBPACK_IMPORTED_MODULE_4__["default"], sagaMiddleware), window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : function (f) {
+var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  collections: {
+    all: [],
+    current: undefined
+  }
+}, Object(redux__WEBPACK_IMPORTED_MODULE_0__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(_logger__WEBPACK_IMPORTED_MODULE_4__["default"], sagaMiddleware), window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : function (f) {
   return f;
 }));
-sagaMiddleware.run(_sagas_collections__WEBPACK_IMPORTED_MODULE_3__["watchFetchCollections"], {
+var config = {
   url: 'http://localhost:81/api/'
-});
+};
+sagaMiddleware.run(_sagas_collections__WEBPACK_IMPORTED_MODULE_3__["watchFetchCollections"], config);
+sagaMiddleware.run(_sagas_collections__WEBPACK_IMPORTED_MODULE_3__["watchFetchCollection"], config);
 /* harmony default export */ __webpack_exports__["default"] = (store);
 
 /***/ }),

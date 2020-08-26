@@ -50,7 +50,7 @@ Home.propTypes = {
 };
 
 const mapState = state => ({
-    collections: state.collections
+    collections: state.collections.all
 });
 
 const mapDispatch = {
