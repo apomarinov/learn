@@ -15,6 +15,7 @@ class CollectionController extends Controller
 
     public function show(Collection $col)
     {
+        $col->load('books');
         return response()->json($col);
     }
 }

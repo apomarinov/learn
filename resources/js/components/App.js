@@ -32,9 +32,9 @@ function App() {
                     <Router history={history()}>
                         <Switch>
                             <Route path="/" exact component={Home} />
-                            <Route path="/collection/:collection/book/:book/lesson/:lesson" component={Lesson} />
-                            <Route path="/collection/:collection/book/:book" component={Book} />
-                            <Route path="/collection/:collection" component={Collection} />
+                            <Route path="/collections/:collection/books/:book/lessons/:lesson" component={Lesson} />
+                            <Route path="/collections/:collection/books/:book" component={Book} />
+                            <Route path="/collections/:collection" component={Collection} />
                         </Switch>
                     </Router>
                 </Container>

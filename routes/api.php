@@ -21,6 +21,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/collections', 'CollectionController@list');
 Route::get('/collections/{col:slug}', 'CollectionController@show');
 Route::get('/collections/{col:slug}/books/{book:slug}', 'BookController@show');
-Route::get('/collections/{col:slug}/books/{book:slug}/lessons/{lesson}', 'LessonController@show');
+Route::get('/collections/{col:slug}/books/{book:slug}/lessons/{lesson:slug}', 'LessonController@show');
 
 Route::get('/words', 'WordController@list');

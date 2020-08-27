@@ -35,7 +35,7 @@ class Home extends React.Component {
                     <GridViewer
                         items={collections}
                         baseUrl={match.url}
-                        urlResource={'collection'}
+                        urlResource={'collections'}
                     />
                 )}
             </div>

@@ -9,7 +9,7 @@ class Collection extends Model
     protected $collection = 'collection';
     protected $appends = ['id'];
     protected $hidden = ['_id'];
-    protected $with = ['books'];
+//    protected $with = ['books'];
 
     public function books()
     {

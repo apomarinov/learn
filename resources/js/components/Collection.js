@@ -1,17 +1,15 @@
 import React from 'react';
-import { useRouteMatch, useParams } from "react-router-dom";
+import {useRouteMatch, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux'
 import GridViewer from "./GridViewer";
 import {getCollection} from "../actions/collections";
 
-
 export default function Collection() {
     const match = useRouteMatch();
     const {collection: slug} = useParams();
-    const collection = useSelector(state => state.collections.current ?? state.collections.all.find(c => c.slug == slug));
+    const collection = useSelector(state => state.collections.current);
     if (!collection) {
-        const dispatch = useDispatch();
-        dispatch(getCollection(slug));
+        useDispatch()(getCollection(slug));
     }
     return (
         <div>
@@ -19,7 +17,7 @@ export default function Collection() {
                 <GridViewer
                     items={collection.books}
                     baseUrl={match.url}
-                    urlResource={'book'}
+                    urlResource={'books'}
                 />
             )}
         </div>

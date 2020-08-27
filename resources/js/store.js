@@ -3,6 +3,7 @@ import createSagaMiddleware from 'redux-saga'
 import reducers from "./reducers";
 import {watchFetchCollection, watchFetchCollections} from './sagas/collections'
 import createLogger from "./logger";
+import {watchFetchBook, watchFetchBooks} from "./sagas/books";
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
@@ -10,7 +11,11 @@ const store = createStore(
     {
         collections: {
             all: [],
-            current: undefined
+            current: undefined,
+        },
+        books: {
+            all: [],
+            current: undefined,
         }
     },
     compose(
@@ -24,5 +29,7 @@ const store = createStore(
 const config = {url: 'http://localhost:81/api/'};
 sagaMiddleware.run(watchFetchCollections, config);
 sagaMiddleware.run(watchFetchCollection, config);
+sagaMiddleware.run(watchFetchBooks, config);
+sagaMiddleware.run(watchFetchBook, config);
 
 export default store;

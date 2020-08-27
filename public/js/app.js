@@ -1,5 +1,34 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["/js/app"],{
 
+/***/ "./resources/js/actions/books.js":
+/*!***************************************!*\
+  !*** ./resources/js/actions/books.js ***!
+  \***************************************/
+/*! exports provided: getBooks, getBook */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBooks", function() { return getBooks; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBook", function() { return getBook; });
+function getBooks(collection) {
+  return {
+    type: 'GET_BOOKS_START',
+    collection: collection
+  };
+}
+;
+function getBook(collection, slug) {
+  return {
+    type: 'GET_BOOK_START',
+    collection: collection,
+    slug: slug
+  };
+}
+;
+
+/***/ }),
+
 /***/ "./resources/js/actions/collections.js":
 /*!*********************************************!*\
   !*** ./resources/js/actions/collections.js ***!
@@ -162,13 +191,13 @@ function App() {
     exact: true,
     component: _Home__WEBPACK_IMPORTED_MODULE_3__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["Route"], {
-    path: "/collection/:collection/book/:book/lesson/:lesson",
+    path: "/collections/:collection/books/:book/lessons/:lesson",
     component: _Lesson__WEBPACK_IMPORTED_MODULE_13__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["Route"], {
-    path: "/collection/:collection/book/:book",
+    path: "/collections/:collection/books/:book",
     component: _Book__WEBPACK_IMPORTED_MODULE_12__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["Route"], {
-    path: "/collection/:collection",
+    path: "/collections/:collection",
     component: _Collection__WEBPACK_IMPORTED_MODULE_11__["default"]
   }))))));
 }
@@ -190,6 +219,7 @@ if (document.getElementById('app')) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Book; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
@@ -202,27 +232,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/ListItem */ "./node_modules/@material-ui/core/esm/ListItem/index.js");
 /* harmony import */ var _material_ui_core_List__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/List */ "./node_modules/@material-ui/core/esm/List/index.js");
 /* harmony import */ var _material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Divider */ "./node_modules/@material-ui/core/esm/Divider/index.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_collections__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../actions/collections */ "./resources/js/actions/collections.js");
+/* harmony import */ var _GridViewer__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./GridViewer */ "./resources/js/components/GridViewer.js");
+/* harmony import */ var _material_ui_core_styles_makeStyles__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/styles/makeStyles */ "./node_modules/@material-ui/core/styles/makeStyles.js");
+/* harmony import */ var _material_ui_core_styles_makeStyles__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles_makeStyles__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _actions_books__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../actions/books */ "./resources/js/actions/books.js");
+/* harmony import */ var _Card__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./Card */ "./resources/js/components/Card.js");
 
 
 
@@ -235,7 +251,11 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var styles = function styles(theme) {
+
+
+
+
+var useStyles = _material_ui_core_styles_makeStyles__WEBPACK_IMPORTED_MODULE_13___default()(function (theme) {
   return {
     root: {
       flexGrow: 1
@@ -245,157 +265,59 @@ var styles = function styles(theme) {
       '& .image': {
         width: '365px',
         height: '525px',
-        background: "url('/images/book1.jpg') no-repeat center"
+        background: "url('/images/book11.jpg') no-repeat center"
       }
     }
   };
-};
+});
+function Book() {
+  var classes = useStyles();
+  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["useHistory"])();
+  var match = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["useRouteMatch"])();
+  var book = Object(react_redux__WEBPACK_IMPORTED_MODULE_10__["useSelector"])(function (state) {
+    return state.books.current;
+  });
 
-var Book = /*#__PURE__*/function (_React$Component) {
-  _inherits(Book, _React$Component);
+  if (!book) {
+    var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["useParams"])(),
+        collection = _useParams.collection,
+        slug = _useParams.book;
 
-  var _super = _createSuper(Book);
-
-  function Book(props) {
-    var _this;
-
-    _classCallCheck(this, Book);
-
-    _this = _super.call(this, props);
-    _this.state = {};
-    return _this;
+    Object(react_redux__WEBPACK_IMPORTED_MODULE_10__["useDispatch"])()(Object(_actions_books__WEBPACK_IMPORTED_MODULE_14__["getBook"])(collection, slug));
   }
 
-  _createClass(Book, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {}
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          classes = _this$props.classes,
-          history = _this$props.history,
-          match = _this$props.match;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: classes.root
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        container: true,
-        spacing: 3,
-        justify: 'center',
-        alignItems: 'stretch'
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        item: true,
-        className: classes.cover
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        elevation: 4,
-        className: 'image'
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        item: true,
-        className: classes.lessonList
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_List__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        "aria-label": "secondary mailbox folders"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        button: true,
-        onClick: function onClick() {
-          return history.push("".concat(match.url, "/lesson/lesson1"));
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["ListItemText"], {
-        primary: "01: Meet Maanee"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_9__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        button: true,
-        onClick: function onClick() {
-          return history.push("".concat(match.url, "/lesson/lesson2"));
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["ListItemText"], {
-        primary: "02: Maanee goes to the ricefield"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_9__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        button: true,
-        onClick: function onClick() {
-          return history.push("".concat(match.url, "/lesson/lesson3"));
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["ListItemText"], {
-        primary: "03: little creature in the ricefield"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_9__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        button: true,
-        onClick: function onClick() {
-          return history.push("".concat(match.url, "/lesson/lesson4"));
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["ListItemText"], {
-        primary: "04: Meet Maanee\u2019s best friend and her cat"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_9__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        button: true,
-        onClick: function onClick() {
-          return history.push("".concat(match.url, "/lesson/lesson5"));
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["ListItemText"], {
-        primary: "05: Meet Dto"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_9__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        button: true,
-        onClick: function onClick() {
-          return history.push("".concat(match.url, "/lesson/lesson6"));
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["ListItemText"], {
-        primary: "06: Maanee looks after her dog \u201CDto\u201D"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_9__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        button: true,
-        onClick: function onClick() {
-          return history.push("".concat(match.url, "/lesson/lesson7"));
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["ListItemText"], {
-        primary: "07: Guess what\u2019s in Chuujai\u2019s hands?"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_9__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        button: true,
-        onClick: function onClick() {
-          return history.push("".concat(match.url, "/lesson/lesson8"));
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["ListItemText"], {
-        primary: "08: Pretty little hair ribbon"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_9__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        button: true,
-        onClick: function onClick() {
-          return history.push("".concat(match.url, "/lesson/lesson9"));
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["ListItemText"], {
-        primary: "09: The cat and the frog"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_9__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        button: true,
-        onClick: function onClick() {
-          return history.push("".concat(match.url, "/lesson/lesson10"));
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["ListItemText"], {
-        primary: "10: Petting little pet\u2019s friend"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_9__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        button: true,
-        onClick: function onClick() {
-          return history.push("".concat(match.url, "/lesson/lesson11"));
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["ListItemText"], {
-        primary: "11: Meet \u201Cbpi-dti\u201D and his horse"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_9__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        button: true,
-        onClick: function onClick() {
-          return history.push("".concat(match.url, "/lesson/lesson12"));
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["ListItemText"], {
-        primary: "12: Scolding the pets"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_9__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        button: true,
-        onClick: function onClick() {
-          return history.push("".concat(match.url, "/lesson/lesson13"));
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["ListItemText"], {
-        primary: "13: Wild animals"
-      }))))));
-    }
-  }]);
-
-  return Book;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-Book.propTypes = {
-  classes: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object.isRequired
-};
-/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["withStyles"])(styles)(Object(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["withRouter"])(Book)));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.root
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    container: true,
+    spacing: 3,
+    justify: 'center',
+    alignItems: 'stretch'
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    item: true,
+    className: classes.cover
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    elevation: 4,
+    className: 'image'
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    item: true,
+    className: classes.lessonList
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_List__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    "aria-label": "secondary mailbox folders"
+  }, book && book.lessons.map(function (lesson) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: lesson.slug
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_9__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      button: true,
+      onClick: function onClick() {
+        return history.push("".concat(match.url, "/lessons/").concat(lesson.slug));
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["ListItemText"], {
+      primary: lesson.title
+    })));
+  })))));
+}
+;
 
 /***/ }),
 
@@ -572,22 +494,17 @@ function Collection() {
       slug = _useParams.collection;
 
   var collection = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useSelector"])(function (state) {
-    var _state$collections$cu;
-
-    return (_state$collections$cu = state.collections.current) !== null && _state$collections$cu !== void 0 ? _state$collections$cu : state.collections.all.find(function (c) {
-      return c.slug == slug;
-    });
+    return state.collections.current;
   });
 
   if (!collection) {
-    var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useDispatch"])();
-    dispatch(Object(_actions_collections__WEBPACK_IMPORTED_MODULE_4__["getCollection"])(slug));
+    Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useDispatch"])()(Object(_actions_collections__WEBPACK_IMPORTED_MODULE_4__["getCollection"])(slug));
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, collection && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_GridViewer__WEBPACK_IMPORTED_MODULE_3__["default"], {
     items: collection.books,
     baseUrl: match.url,
-    urlResource: 'book'
+    urlResource: 'books'
   }));
 }
 
@@ -990,7 +907,7 @@ var Home = /*#__PURE__*/function (_React$Component) {
       }, collections && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_GridViewer__WEBPACK_IMPORTED_MODULE_8__["default"], {
         items: collections,
         baseUrl: match.url,
-        urlResource: 'collection'
+        urlResource: 'collections'
       }));
     }
   }]);
@@ -1900,6 +1817,47 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/reducers/books.js":
+/*!****************************************!*\
+  !*** ./resources/js/reducers/books.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var books = function books() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case 'GET_BOOKS_DONE':
+      var all = action.books;
+      return _objectSpread(_objectSpread({}, state), {}, {
+        all: all
+      });
+
+    case 'GET_BOOK_DONE':
+      var current = action.book;
+      return _objectSpread(_objectSpread({}, state), {}, {
+        current: current
+      });
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (books);
+
+/***/ }),
+
 /***/ "./resources/js/reducers/collections.js":
 /*!**********************************************!*\
   !*** ./resources/js/reducers/collections.js ***!
@@ -1952,12 +1910,155 @@ var collections = function collections() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _collections__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./collections */ "./resources/js/reducers/collections.js");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _books__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./books */ "./resources/js/reducers/books.js");
+
 
 
 var reducers = Object(redux__WEBPACK_IMPORTED_MODULE_1__["combineReducers"])({
-  collections: _collections__WEBPACK_IMPORTED_MODULE_0__["default"]
+  collections: _collections__WEBPACK_IMPORTED_MODULE_0__["default"],
+  books: _books__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (reducers);
+
+/***/ }),
+
+/***/ "./resources/js/sagas/books.js":
+/*!*************************************!*\
+  !*** ./resources/js/sagas/books.js ***!
+  \*************************************/
+/*! exports provided: fetchBooks, watchFetchBooks, fetchBook, watchFetchBook */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBooks", function() { return fetchBooks; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "watchFetchBooks", function() { return watchFetchBooks; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBook", function() { return fetchBook; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "watchFetchBook", function() { return watchFetchBook; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _redux_saga_core_effects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @redux-saga/core/effects */ "./node_modules/@redux-saga/core/dist/redux-saga-effects.esm.js");
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-saga/effects */ "./node_modules/redux-saga/dist/redux-saga-effects-npm-proxy.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+
+
+var _marked = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(fetchBooks),
+    _marked2 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFetchBooks),
+    _marked3 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(fetchBook),
+    _marked4 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFetchBook);
+
+
+
+
+function fetchBooks(api, _ref) {
+  var collection, data;
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function fetchBooks$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          collection = _ref.collection;
+          _context.prev = 1;
+          _context.next = 4;
+          return Object(_redux_saga_core_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(axios__WEBPACK_IMPORTED_MODULE_3___default.a.get, api.url + 'collections/' + collection + '/books');
+
+        case 4:
+          data = _context.sent;
+          _context.next = 7;
+          return Object(_redux_saga_core_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+            type: "GET_BOOKS_DONE",
+            books: data.data
+          });
+
+        case 7:
+          _context.next = 13;
+          break;
+
+        case 9:
+          _context.prev = 9;
+          _context.t0 = _context["catch"](1);
+          _context.next = 13;
+          return Object(_redux_saga_core_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+            type: "GET_BOOKS_FAIL",
+            message: _context.t0
+          });
+
+        case 13:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, _marked, null, [[1, 9]]);
+}
+function watchFetchBooks(api) {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFetchBooks$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])('GET_BOOKS_START', fetchBooks, api);
+
+        case 2:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  }, _marked2);
+}
+function fetchBook(api, _ref2) {
+  var collection, slug, data;
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function fetchBook$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          collection = _ref2.collection, slug = _ref2.slug;
+          _context3.prev = 1;
+          _context3.next = 4;
+          return Object(_redux_saga_core_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(axios__WEBPACK_IMPORTED_MODULE_3___default.a.get, api.url + 'collections/' + collection + '/books/' + slug);
+
+        case 4:
+          data = _context3.sent;
+          _context3.next = 7;
+          return Object(_redux_saga_core_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+            type: "GET_BOOK_DONE",
+            book: data.data
+          });
+
+        case 7:
+          _context3.next = 13;
+          break;
+
+        case 9:
+          _context3.prev = 9;
+          _context3.t0 = _context3["catch"](1);
+          _context3.next = 13;
+          return Object(_redux_saga_core_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+            type: "GET_BOOK_FAIL",
+            message: _context3.t0
+          });
+
+        case 13:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  }, _marked3, null, [[1, 9]]);
+}
+function watchFetchBook(api) {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFetchBook$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])('GET_BOOK_START', fetchBook, api);
+
+        case 2:
+        case "end":
+          return _context4.stop();
+      }
+    }
+  }, _marked4);
+}
 
 /***/ }),
 
@@ -2114,6 +2215,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reducers */ "./resources/js/reducers/index.js");
 /* harmony import */ var _sagas_collections__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./sagas/collections */ "./resources/js/sagas/collections.js");
 /* harmony import */ var _logger__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./logger */ "./resources/js/logger.js");
+/* harmony import */ var _sagas_books__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./sagas/books */ "./resources/js/sagas/books.js");
+
 
 
 
@@ -2122,6 +2225,10 @@ __webpack_require__.r(__webpack_exports__);
 var sagaMiddleware = Object(redux_saga__WEBPACK_IMPORTED_MODULE_1__["default"])();
 var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers__WEBPACK_IMPORTED_MODULE_2__["default"], {
   collections: {
+    all: [],
+    current: undefined
+  },
+  books: {
     all: [],
     current: undefined
   }
@@ -2133,6 +2240,8 @@ var config = {
 };
 sagaMiddleware.run(_sagas_collections__WEBPACK_IMPORTED_MODULE_3__["watchFetchCollections"], config);
 sagaMiddleware.run(_sagas_collections__WEBPACK_IMPORTED_MODULE_3__["watchFetchCollection"], config);
+sagaMiddleware.run(_sagas_books__WEBPACK_IMPORTED_MODULE_5__["watchFetchBooks"], config);
+sagaMiddleware.run(_sagas_books__WEBPACK_IMPORTED_MODULE_5__["watchFetchBook"], config);
 /* harmony default export */ __webpack_exports__["default"] = (store);
 
 /***/ }),
